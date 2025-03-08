@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentPlayer = player1Emoji;
     gameBoard = Array(9).fill("");
     messageElement.textContent = "";
-    congratulationTextElement.textContent = "Поздравляю с 8 Марта!"; // Восстанавливаем текст
+    congratulationTextElement.textContent = "Поздравляю с 8 Марта! 🌸"; // Восстанавливаем текст
     initializeBoard();
   }
 
