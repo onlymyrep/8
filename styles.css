@@ -26,12 +26,6 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
-  font-size: 1.6rem;
-  margin-bottom: 20px;
-  color: #d6336c;
-}
-
 #congratulation-text {
   font-size: 24px;
   margin-bottom: 20px;
