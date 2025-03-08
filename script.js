@@ -106,11 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = congratulationTextElement.textContent;
     if (text.length === 0) return; // Если строка пустая, ничего не делаем
 
-    const randomIndex = Math.floor(Math.random() * text.length);
-    const fallingChar = text[randomIndex];
+    // Разбиваем строку на массив символов с учетом эмодзи
+    const textArray = Array.from(text);
+    const randomIndex = Math.floor(Math.random() * textArray.length);
+    const fallingChar = textArray[randomIndex];
 
     // Удаляем символ из строки
-    congratulationTextElement.textContent = text.slice(0, randomIndex) + text.slice(randomIndex + 1);
+    textArray.splice(randomIndex, 1);
+    congratulationTextElement.textContent = textArray.join("");
 
     // Создаем элемент для падающего символа
     const fallingElement = document.createElement("div");
