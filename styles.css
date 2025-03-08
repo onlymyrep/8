@@ -14,11 +14,6 @@ body {
   transition: background 0.5s, color 0.5s;
 }
 
-body.dark-theme {
-  background: linear-gradient(135deg, #2c3e50, #34495e, #4a69bd, #6a89cc);
-  color: #fff;
-}
-
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -52,8 +47,10 @@ h1 {
 /* Игровое поле */
 .game-board {
   display: grid;
-  gap: 10px;
+  gap: 5px;
   margin: 20px auto;
+  width: 90vw;
+  max-width: 400px;
 }
 
 .cell {
@@ -62,10 +59,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   cursor: pointer;
   user-select: none;
   transition: background 0.3s ease;
+  aspect-ratio: 1; /* Квадратные ячейки */
 }
 
 .cell:hover {
@@ -112,9 +110,7 @@ h1 {
 /* Мобильная оптимизация */
 @media (max-width: 600px) {
   .cell {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   h1 {
@@ -123,5 +119,9 @@ h1 {
 
   #congratulation-text {
     font-size: 18px;
+  }
+
+  .controls button {
+    font-size: 20px;
   }
 }

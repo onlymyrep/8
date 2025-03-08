@@ -10,6 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentLevel = 1; // 1: Легкий (3x3), 2: Средний (4x4), 3: Сложный (5x5)
   let isMusicOn = false; // Музыка по умолчанию выключена
   let isDarkTheme = false;
+  let restartCount = 0; // Счётчик нажатий на кнопку "Начать заново"
+
+  const themes = [
+    { background: "linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee)", color: "#333" },
+    { background: "linear-gradient(135deg, #2c3e50, #34495e, #4a69bd, #6a89cc)", color: "#fff" },
+    { background: "linear-gradient(135deg, #ff6f61, #ffcc99, #ffb6b9, #a8e6cf)", color: "#333" },
+    { background: "linear-gradient(135deg, #6b5b95, #88b04b, #f7cac9, #92a8d1)", color: "#fff" },
+    { background: "linear-gradient(135deg, #ff6b6b, #ffcc99, #ff6b6b, #4ecdc4)", color: "#333" },
+    { background: "linear-gradient(135deg, #45b7d8, #4ecdc4, #d4f1f4, #f0f8ff)", color: "#333" },
+    { background: "linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee)", color: "#333" },
+    { background: "linear-gradient(135deg, #2c3e50, #34495e, #4a69bd, #6a89cc)", color: "#fff" },
+    { background: "linear-gradient(135deg, #ff6f61, #ffcc99, #ffb6b9, #a8e6cf)", color: "#333" },
+    { background: "linear-gradient(135deg, #6b5b95, #88b04b, #f7cac9, #92a8d1)", color: "#fff" }
+  ];
 
   const emojis = ["🌹", "🌷", "🌸", "🌺", "🌻", "🌼", "💐", "🥀"];
   let player1Emoji, player2Emoji;
@@ -41,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function initializeBoard() {
     gameBoardElement.innerHTML = "";
     const size = currentLevel === 1 ? 3 : currentLevel === 2 ? 4 : 5;
-    gameBoardElement.style.gridTemplateColumns = `repeat(${size}, 100px)`;
-    gameBoardElement.style.gridTemplateRows = `repeat(${size}, 100px)`;
+    gameBoardElement.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gameBoardElement.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
     for (let i = 0; i < size * size; i++) {
       const cell = document.createElement("div");
@@ -186,15 +200,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Переключение темы
   themeToggle.addEventListener("click", () => {
-    isDarkTheme = !isDarkTheme;
-    document.body.classList.toggle("dark-theme", isDarkTheme);
-    themeToggle.textContent = isDarkTheme ? "🌙" : "☀️";
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+    document.body.style.background = randomTheme.background;
+    document.body.style.color = randomTheme.color;
   });
 
   // Перезапуск игры
   restartButton.addEventListener("click", () => {
-    currentLevel = 1;
-    initializeGame();
+    if (restartCount === 0) {
+      initializeGame(); // Перезапуск текущего уровня
+      restartCount++;
+    } else {
+      currentLevel = 1; // Начать с первого уровня
+      restartCount = 0;
+      initializeGame();
+    }
   });
 
   // Инициализация игры при загрузке
