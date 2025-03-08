@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (checkWin()) {
       messageElement.textContent = `Победил ${currentPlayer}!`;
-      playWinSound();
       if (currentLevel < 3) {
         currentLevel++;
         setTimeout(() => initializeGame(), 1000);
@@ -143,12 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".cell").forEach(cell => {
       cell.removeEventListener("click", handleCellClick);
     });
-  }
-
-  // Воспроизведение звука победы
-  function playWinSound() {
-    const winSound = new Audio('win.mp3');
-    winSound.play();
   }
 
   // Переключение музыки

@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <!-- Мета-теги -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#d6336c">
+  <meta name="description" content="Поздравление с 8 Марта — интерактивное приложение для праздника.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Заголовок -->
   <title>Игра: Поздравление с 8 Марта!</title>
+
+  <!-- Шрифты -->
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <!-- Стили -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Иконки -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png">
+
+  <!-- Манифест PWA -->
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!-- Контейнер игры -->
   <div id="game-container">
     <h1>Поздравляю с 8 Марта! 🌸</h1>
     <div id="congratulation-text">Поздравляю с 8 Марта! 🌸</div>
@@ -21,10 +40,14 @@
     </div>
     <div id="message" class="message"></div>
   </div>
+
+  <!-- Фоновая музыка -->
   <audio id="background-music" loop>
     <source src="background-music.mp3" type="audio/mpeg">
     Ваш браузер не поддерживает аудиоэлемент.
   </audio>
+
+  <!-- Скрипты -->
   <script src="script.js" defer></script>
 </body>
 </html>
