@@ -11,7 +11,7 @@ body {
   align-items: center;
   min-height: 100vh;
   color: #333;
-  transition: background 0.3s ease, color 0.3s ease; /* Уменьшено время перехода */
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 @keyframes gradientBG {
@@ -41,7 +41,6 @@ h1 {
   font-size: 24px;
   margin-bottom: 20px;
   color: #d6336c;
-  position: relative;
 }
 
 /* Игровое поле */
@@ -62,7 +61,7 @@ h1 {
   font-size: 2rem;
   cursor: pointer;
   user-select: none;
-  transition: background 0.2s ease; /* Уменьшено время перехода */
+  transition: background 0.2s ease;
   aspect-ratio: 1; /* Квадратные ячейки */
 }
 
@@ -91,25 +90,11 @@ h1 {
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: transform 0.2s ease; /* Добавлен переход для кнопок */
+  transition: transform 0.2s ease;
 }
 
 .controls button:hover {
-  transform: scale(1.1); /* Эффект увеличения при наведении */
-}
-
-/* Анимация фейерверка */
-.firework {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  animation: explode 1s ease-out;
-}
-
-@keyframes explode {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(10); opacity: 0; }
+  transform: scale(1.1);
 }
 
 /* Мобильная оптимизация */

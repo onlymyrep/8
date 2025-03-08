@@ -112,13 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
     gameBoard[index] = currentPlayer;
     cell.textContent = currentPlayer;
 
-    // Анимация падающего символа
-    animateText();
-
     if (checkWin()) {
       messageElement.textContent = `Победил ${currentPlayer}!`;
       playWinSound();
-      createFireworks();
       if (currentLevel < 3) {
         currentLevel++;
         setTimeout(() => initializeGame(), 3000);
@@ -213,60 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function playWinSound() {
     const winSound = new Audio('win.mp3');
     winSound.play();
-  }
-
-  // Анимация фейерверка
-  function createFireworks() {
-    for (let i = 0; i < 50; i++) {
-      const firework = document.createElement("div");
-      firework.classList.add("firework");
-      firework.style.left = `${Math.random() * 100}vw`;
-      firework.style.top = `${Math.random() * 100}vh`;
-      firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      document.body.appendChild(firework);
-      setTimeout(() => firework.remove(), 1000);
-    }
-  }
-
-  // Анимация падающих символов
-  function animateText() {
-    const text = congratulationTextElement.textContent;
-    if (text.length === 0) return;
-
-    // Игнорируем пробелы
-    const textArray = Array.from(text).filter(char => char !== " ");
-    if (textArray.length === 0) return;
-
-    const randomIndex = Math.floor(Math.random() * textArray.length);
-    const fallingChar = textArray[randomIndex];
-
-    // Удаляем символ из строки
-    textArray.splice(randomIndex, 1);
-    congratulationTextElement.textContent = textArray.join("");
-
-    // Создаем элемент для падающего символа
-    const fallingElement = document.createElement("div");
-    fallingElement.textContent = fallingChar;
-    fallingElement.classList.add("falling-char");
-
-    // Позиционируем элемент сверху
-    const textRect = congratulationTextElement.getBoundingClientRect();
-    fallingElement.style.left = `${textRect.left + Math.random() * textRect.width}px`;
-    fallingElement.style.top = `${textRect.top}px`;
-
-    document.body.appendChild(fallingElement);
-
-    // Анимация падения
-    fallingElement.animate(
-      [
-        { transform: "translateY(0)", opacity: 1 },
-        { transform: `translateY(${window.innerHeight}px)`, opacity: 0 }
-      ],
-      {
-        duration: 2000,
-        easing: "linear"
-      }
-    ).onfinish = () => fallingElement.remove();
   }
 
   // Переключение музыки
