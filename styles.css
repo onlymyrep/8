@@ -11,7 +11,7 @@ body {
   align-items: center;
   min-height: 100vh;
   color: #333;
-  transition: background 0.5s, color 0.5s;
+  transition: background 0.3s ease, color 0.3s ease; /* Уменьшено время перехода */
 }
 
 @keyframes gradientBG {
@@ -62,7 +62,7 @@ h1 {
   font-size: 2rem;
   cursor: pointer;
   user-select: none;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease; /* Уменьшено время перехода */
   aspect-ratio: 1; /* Квадратные ячейки */
 }
 
@@ -91,6 +91,11 @@ h1 {
   border: none;
   cursor: pointer;
   padding: 0;
+  transition: transform 0.2s ease; /* Добавлен переход для кнопок */
+}
+
+.controls button:hover {
+  transform: scale(1.1); /* Эффект увеличения при наведении */
 }
 
 /* Анимация фейерверка */

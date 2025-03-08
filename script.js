@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let isMusicOn = false; // Музыка по умолчанию выключена
   let restartCount = 0; // Счётчик нажатий на кнопку "Начать заново"
 
-  // 50 тем в стиле Material Design
   const themes = [
     { background: "#FFEBEE", color: "#D32F2F", button: "#FFCDD2", cell: "#FFEBEE" },
     { background: "#F3E5F5", color: "#7B1FA2", button: "#E1BEE7", cell: "#F3E5F5" },
@@ -234,7 +233,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = congratulationTextElement.textContent;
     if (text.length === 0) return;
 
-    const textArray = Array.from(text);
+    // Игнорируем пробелы
+    const textArray = Array.from(text).filter(char => char !== " ");
+    if (textArray.length === 0) return;
+
     const randomIndex = Math.floor(Math.random() * textArray.length);
     const fallingChar = textArray[randomIndex];
 
@@ -247,18 +249,24 @@ document.addEventListener("DOMContentLoaded", () => {
     fallingElement.textContent = fallingChar;
     fallingElement.classList.add("falling-char");
 
-    // Позиционируем элемент на месте удаленного символа
+    // Позиционируем элемент сверху
     const textRect = congratulationTextElement.getBoundingClientRect();
-    const charWidth = 15; // Примерная ширина символа
-    fallingElement.style.left = `${textRect.left + randomIndex * charWidth}px`;
+    fallingElement.style.left = `${textRect.left + Math.random() * textRect.width}px`;
     fallingElement.style.top = `${textRect.top}px`;
 
     document.body.appendChild(fallingElement);
 
-    // Удаление элемента после завершения анимации
-    fallingElement.addEventListener("animationend", () => {
-      fallingElement.remove();
-    });
+    // Анимация падения
+    fallingElement.animate(
+      [
+        { transform: "translateY(0)", opacity: 1 },
+        { transform: `translateY(${window.innerHeight}px)`, opacity: 0 }
+      ],
+      {
+        duration: 2000,
+        easing: "linear"
+      }
+    ).onfinish = () => fallingElement.remove();
   }
 
   // Переключение музыки
