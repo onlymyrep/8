@@ -108,7 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Разбиваем строку на массив символов с учетом эмодзи
     const textArray = Array.from(text);
-    const randomIndex = Math.floor(Math.random() * textArray.length);
+
+    // Находим индекс символа, который не является пробелом
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * textArray.length);
+    } while (textArray[randomIndex] === " "); // Пропускаем пробелы
+
     const fallingChar = textArray[randomIndex];
 
     // Удаляем символ из строки
