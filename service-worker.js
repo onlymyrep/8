@@ -1,6 +1,6 @@
 const CACHE_NAME = '8marta-v1';
 const ASSETS = [
-  '.',
+  '/',
   'index.html',
   'styles.css',
   'script.js',
