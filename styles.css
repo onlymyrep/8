@@ -1,3 +1,4 @@
+/* Основные стили */
 body {
   margin: 0;
   padding: 0;
@@ -24,6 +25,7 @@ body.dark-theme {
   100% { background-position: 0% 50%; }
 }
 
+/* Контейнер игры */
 #game-container {
   text-align: center;
   background: rgba(255, 255, 255, 0.8);
@@ -32,12 +34,14 @@ body.dark-theme {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Заголовок */
 h1 {
   font-size: 1.6rem;
   margin-bottom: 20px;
   color: #d6336c;
 }
 
+/* Текст поздравления */
 #congratulation-text {
   font-size: 24px;
   margin-bottom: 20px;
@@ -45,6 +49,7 @@ h1 {
   position: relative;
 }
 
+/* Игровое поле */
 .game-board {
   display: grid;
   gap: 10px;
@@ -67,81 +72,26 @@ h1 {
   background: rgba(255, 255, 255, 1);
 }
 
-.restart-button, .theme-button, .music-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 20px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  background-color: #d6336c;
-  transition: background 0.3s ease;
-}
-
-.restart-button:hover, .theme-button:hover, .music-button:hover {
-  background-color: #a61e4d;
-}
-
+/* Сообщение */
 .message {
   font-size: 1.5rem;
   margin-top: 20px;
   color: #d6336c;
 }
 
-.falling-char {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 24px;
-  color: #d6336c;
-  animation: fall 2s linear forwards;
+/* Кнопки управления */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-@keyframes fall {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100vh); }
-}
-
-.firework {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #ff0;
-  border-radius: 50%;
-  animation: explode 1s ease-out;
-}
-
-@keyframes explode {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(10); opacity: 0; }
-}
-
-@media (max-width: 600px) {
-  .cell {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
-  }
-
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  #congratulation-text {
-    font-size: 18px;
-  }
-}
-
-
-
-/* Стили для кнопок с эмодзи */
-#music-toggle, #theme-toggle, #restart-button {
+.controls button {
   font-size: 24px;
   background: none;
   border: none;
   cursor: pointer;
-  margin: 10px;
   padding: 0;
 }
 
@@ -157,4 +107,21 @@ h1 {
 @keyframes explode {
   0% { transform: scale(1); opacity: 1; }
   100% { transform: scale(10); opacity: 0; }
+}
+
+/* Мобильная оптимизация */
+@media (max-width: 600px) {
+  .cell {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  #congratulation-text {
+    font-size: 18px;
+  }
 }
