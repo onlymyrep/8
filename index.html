@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Игра: Поздравление с 8 Марта!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+  <div id="game-container">
+    <h1>Поздравляю с 8 Марта! 🌸</h1>
+    <div id="game-board" class="game-board"></div>
+    <button id="restart-button" class="restart-button">Начать заново</button>
+    <div id="message" class="message"></div>
+    <!-- Кнопка "Установить" -->
+    <button id="installButton" class="install-button" style="display: none;">Установить приложение</button>
+  </div>
+  <script src="/script.js"></script>
+  <script>
+    // Регистрация Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker зарегистрирован:', registration);
+        })
+        .catch((error) => {
+          console.error('Ошибка регистрации Service Worker:', error);
+        });
+    }
+
+    // Логика для кнопки "Установить"
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+      document.getElementById('installButton').style.display = 'block';
+    });
+
+    document.getElementById('installButton').addEventListener('click', () => {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Пользователь установил приложение');
+        } else {
+          console.log('Пользователь отказался от установки');
+        }
+        deferredPrompt = null;
+        document.getElementById('installButton').style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
