@@ -1,11 +1,12 @@
 const CACHE_NAME = '8marta-v1';
 const ASSETS = [
   '/',
-  'index.html',
-  'styles.css',
-  'script.js',
-  'icon-192x192.png',
-  'icon-512x512.png'
+  '/index.html',
+  '/styles.css',
+  '/script.js',
+  '/icon-192x192.png',
+  '/icon-512x512.png',
+  '/offline.html' // Добавьте fallback-страницу
 ];
 
 // Установка Service Worker и кэширование ресурсов
@@ -13,6 +14,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => cache.addAll(ASSETS))
+      .then(() => self.skipWaiting()) // Активируем Service Worker сразу после установки
       .catch((error) => {
         console.error('Ошибка при кэшировании ресурсов:', error);
       })
@@ -26,38 +28,45 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
+            return caches.delete(cacheName); // Удаляем старые кэши
           }
         })
       );
-    })
+    }).then(() => self.clients.claim()) // Активируем Service Worker для всех клиентов
   );
 });
 
 // Обработка запросов
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Возвращаем закэшированный ресурс, если он есть
-        if (response) {
-          return response;
-        }
+  const { request } = event;
 
-        // Иначе загружаем ресурс из сети
-        return fetch(event.request)
-          .then((networkResponse) => {
-            // Кэшируем новый ресурс
-            return caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, networkResponse.clone());
-                return networkResponse;
-              });
-          })
-          .catch(() => {
-            // Обработка ошибок (например, возврат fallback-страницы)
-            return caches.match('/offline.html'); // Замените на ваш fallback
-          });
-      })
+  // Игнорируем запросы, которые не являются HTTP/HTTPS
+  if (!request.url.startsWith('http')) {
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {
+      // Возвращаем закэшированный ресурс, если он есть
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      // Иначе загружаем ресурс из сети
+      return fetch(request).then((networkResponse) => {
+        // Клонируем ответ, чтобы использовать его для кэширования
+        const responseToCache = networkResponse.clone();
+
+        // Кэшируем новый ресурс
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(request, responseToCache);
+        });
+
+        return networkResponse;
+      }).catch(() => {
+        // Возвращаем fallback-страницу, если сеть недоступна
+        return caches.match('/offline.html');
+      });
+    })
   );
 });
