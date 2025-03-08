@@ -11,11 +11,13 @@ body {
   min-height: 100vh;
   color: #333;
 }
+
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 #game-container {
   text-align: center;
   background: rgba(255, 255, 255, 0.8);
@@ -37,6 +39,7 @@ h1 {
   gap: 10px;
   margin: 20px auto;
 }
+
 .cell {
   background: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
@@ -75,9 +78,8 @@ h1 {
   color: #d6336c;
 }
 
-
 .install-button {
-  background-color: #d6336c; /* Розовый цвет */
+  background-color: #d6336c;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -88,5 +90,5 @@ h1 {
 }
 
 .install-button:hover {
-  background-color: #b02a57; /* Темнее розовый при наведении */
+  background-color: #b02a57;
 }

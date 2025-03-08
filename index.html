@@ -15,12 +15,10 @@
     <div id="game-board" class="game-board"></div>
     <button id="restart-button" class="restart-button">Начать заново</button>
     <div id="message" class="message"></div>
-    <!-- Кнопка "Установить" -->
     <button id="installButton" class="install-button" style="display: none;">Установить приложение</button>
   </div>
   <script src="script.js"></script>
   <script>
-    // Регистрация Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js')
         .then((registration) => {
@@ -31,7 +29,6 @@
         });
     }
 
-    // Логика для кнопки "Установить"
     let deferredPrompt;
 
     window.addEventListener('beforeinstallprompt', (event) => {
