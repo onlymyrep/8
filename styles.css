@@ -58,7 +58,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 3rem;
   cursor: pointer;
   user-select: none;
   transition: background 0.2s ease;
@@ -83,24 +83,21 @@ h1 {
   gap: 10px;
   margin-top: 20px;
 }
-
 .controls button {
-  font-size: 24px;
+  font-size: 32px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   transition: transform 0.2s ease;
 }
-
 .controls button:hover {
   transform: scale(1.1);
 }
-
 /* Мобильная оптимизация */
 @media (max-width: 600px) {
   .cell {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   h1 {
@@ -112,6 +109,6 @@ h1 {
   }
 
   .controls button {
-    font-size: 20px;
+    font-size: 24px;
   }
 }

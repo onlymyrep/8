@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
       playWinSound();
       if (currentLevel < 3) {
         currentLevel++;
-        setTimeout(() => initializeGame(), 3000);
+        setTimeout(() => initializeGame(), 1000);
       } else {
         endGame();
       }
