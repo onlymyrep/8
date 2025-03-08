@@ -1,11 +1,11 @@
 const CACHE_NAME = '8marta-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/script.js',
-  '/icon-192x192.png',
-  '/icon-512x512.png'
+  '.',
+  'index.html',
+  'styles.css',
+  'script.js',
+  'icon-192x192.png',
+  'icon-512x512.png'
 ];
 
 // Установка Service Worker и кэширование ресурсов
