@@ -92,3 +92,17 @@ h1 {
 .install-button:hover {
   background-color: #b02a57;
 }
+
+.falling-char {
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 10px);
+  font-size: 24px;
+  color: #d6336c;
+  animation: fall 2s linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}

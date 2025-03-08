@@ -17,38 +17,10 @@
     <div id="message" class="message"></div>
     <button id="installButton" class="install-button" style="display: none;">Установить приложение</button>
   </div>
+  <audio id="background-music" loop>
+    <source src="background-music.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудиоэлемент.
+  </audio>
   <script src="script.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then((registration) => {
-          console.log('Service Worker зарегистрирован:', registration);
-        })
-        .catch((error) => {
-          console.error('Ошибка регистрации Service Worker:', error);
-        });
-    }
-
-    let deferredPrompt;
-
-    window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();
-      deferredPrompt = event;
-      document.getElementById('installButton').style.display = 'block';
-    });
-
-    document.getElementById('installButton').addEventListener('click', () => {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('Пользователь установил приложение');
-        } else {
-          console.log('Пользователь отказался от установки');
-        }
-        deferredPrompt = null;
-        document.getElementById('installButton').style.display = 'none';
-      });
-    });
-  </script>
 </body>
 </html>
