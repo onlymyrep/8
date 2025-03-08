@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const restartButton = document.getElementById("restart-button");
   const congratulationTextElement = document.getElementById("congratulation-text");
 
-  let currentLevel = 1; // 1: Легкий, 2: Средний, 3: Сложный
-  let isMusicOn = true;
+  let currentLevel = 1; // 1: Легкий (3x3), 2: Средний (4x4), 3: Сложный (5x5)
+  let isMusicOn = false; // Музыка по умолчанию выключена
   let isDarkTheme = false;
 
   const emojis = ["🌹", "🌷", "🌸", "🌺", "🌻", "🌼", "💐", "🥀"];
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       currentPlayer = currentPlayer === player1Emoji ? player2Emoji : player1Emoji;
       if (currentPlayer === player2Emoji && currentLevel === 3) {
-        makeAIMove();
+        setTimeout(() => makeAIMove(), 500); // ИИ ходит с задержкой
       }
     }
   }
@@ -167,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
       firework.classList.add("firework");
       firework.style.left = `${Math.random() * 100}vw`;
       firework.style.top = `${Math.random() * 100}vh`;
+      firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
       document.body.appendChild(firework);
       setTimeout(() => firework.remove(), 1000);
     }
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Переключение музыки
   musicToggle.addEventListener("click", () => {
     isMusicOn = !isMusicOn;
-    musicToggle.textContent = `Музыка: ${isMusicOn ? "Вкл" : "Выкл"}`;
+    musicToggle.textContent = isMusicOn ? "🔊" : "🔇";
     if (isMusicOn) {
       backgroundMusic.play();
     } else {
@@ -187,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
   themeToggle.addEventListener("click", () => {
     isDarkTheme = !isDarkTheme;
     document.body.classList.toggle("dark-theme", isDarkTheme);
-    themeToggle.textContent = isDarkTheme ? "Светлая тема" : "Тёмная тема";
+    themeToggle.textContent = isDarkTheme ? "🌙" : "☀️";
   });
 
   // Перезапуск игры

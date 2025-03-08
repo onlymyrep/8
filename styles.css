@@ -132,3 +132,29 @@ h1 {
     font-size: 18px;
   }
 }
+
+
+
+/* Стили для кнопок с эмодзи */
+#music-toggle, #theme-toggle, #restart-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+  padding: 0;
+}
+
+/* Анимация фейерверка */
+.firework {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: explode 1s ease-out;
+}
+
+@keyframes explode {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(10); opacity: 0; }
+}
