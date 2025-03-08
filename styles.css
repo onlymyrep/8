@@ -27,7 +27,7 @@ body {
 h1 {
   font-size: 1.6rem;
   margin-bottom: 20px;
-  color: rgb(147, 112, 219); 		/*#d6336c;*/
+  color: #d6336c;
 }
 
 .game-board {
