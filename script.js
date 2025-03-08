@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-
- 
   const backgroundMusic = document.getElementById("background-music");
   backgroundMusic.play().catch(() => {
     console.log("Автовоспроизведение музыки заблокировано. Нажмите на страницу, чтобы включить музыку.");
@@ -12,14 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
     backgroundMusic.play();
   }, { once: true });
 
-  
-
-
-
-
   const gameBoardElement = document.getElementById("game-board");
   const messageElement = document.getElementById("message");
   const restartButton = document.getElementById("restart-button");
+  const congratulationTextElement = document.getElementById("congratulation-text");
 
   const emojis = ["🌹", "🌷", "🌸", "🌺", "🌻", "🌼", "💐", "🥀"];
   let player1Emoji, player2Emoji;
@@ -33,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Инициализация игры
   function initializeGame() {
-    // Выбираем два случайных эмодзи для игроков
     [player1Emoji, player2Emoji] = getRandomEmojis();
     currentPlayer = player1Emoji;
     gameBoard = Array(9).fill("");
     messageElement.textContent = "";
+    congratulationTextElement.textContent = "Поздравляю с 8 Марта!"; // Восстанавливаем текст
     initializeBoard();
   }
 
@@ -110,13 +103,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Анимация падения символов
   function animateText() {
-    const text = "Поздравляю с 8 Марта!";
+    const text = congratulationTextElement.textContent;
+    if (text.length === 0) return; // Если строка пустая, ничего не делаем
+
     const randomIndex = Math.floor(Math.random() * text.length);
     const fallingChar = text[randomIndex];
 
+    // Удаляем символ из строки
+    congratulationTextElement.textContent = text.slice(0, randomIndex) + text.slice(randomIndex + 1);
+
+    // Создаем элемент для падающего символа
     const fallingElement = document.createElement("div");
     fallingElement.textContent = fallingChar;
     fallingElement.classList.add("falling-char");
+
+    // Позиционируем элемент на месте удаленного символа
+    const textRect = congratulationTextElement.getBoundingClientRect();
+    const charWidth = 15; // Примерная ширина символа
+    fallingElement.style.left = `${textRect.left + randomIndex * charWidth}px`;
+    fallingElement.style.top = `${textRect.top}px`;
+
     document.body.appendChild(fallingElement);
 
     // Удаление элемента после завершения анимации
