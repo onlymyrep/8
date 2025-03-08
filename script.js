@@ -126,9 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
       endGame();
     } else {
       currentPlayer = currentPlayer === player1Emoji ? player2Emoji : player1Emoji;
-      if (currentPlayer === player2Emoji && currentLevel === 3) {
-        setTimeout(() => makeAIMove(), 500); // ИИ ходит с задержкой
-      }
     }
   }
 
@@ -139,63 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return gameBoard[index] === currentPlayer;
       });
     });
-  }
-
-  // Ход ИИ (алгоритм минимакс)
-  function makeAIMove() {
-    let bestMove = findBestMove();
-    gameBoard[bestMove] = player2Emoji;
-    document.querySelector(`.cell[data-index="${bestMove}"]`).textContent = player2Emoji;
-    handleCellClick({ target: document.querySelector(`.cell[data-index="${bestMove}"]`) });
-  }
-
-  function findBestMove() {
-    let bestScore = -Infinity;
-    let move;
-    for (let i = 0; i < gameBoard.length; i++) {
-      if (gameBoard[i] === "") {
-        gameBoard[i] = player2Emoji;
-        let score = minimax(gameBoard, 0, false);
-        gameBoard[i] = "";
-        if (score > bestScore) {
-          bestScore = score;
-          move = i;
-        }
-      }
-    }
-    return move;
-  }
-
-  function minimax(board, depth, isMaximizing) {
-    if (checkWin()) {
-      return isMaximizing ? -10 : 10;
-    } else if (board.every(cell => cell !== "")) {
-      return 0;
-    }
-
-    if (isMaximizing) {
-      let bestScore = -Infinity;
-      for (let i = 0; i < board.length; i++) {
-        if (board[i] === "") {
-          board[i] = player2Emoji;
-          let score = minimax(board, depth + 1, false);
-          board[i] = "";
-          bestScore = Math.max(score, bestScore);
-        }
-      }
-      return bestScore;
-    } else {
-      let bestScore = Infinity;
-      for (let i = 0; i < board.length; i++) {
-        if (board[i] === "") {
-          board[i] = player1Emoji;
-          let score = minimax(board, depth + 1, true);
-          board[i] = "";
-          bestScore = Math.min(score, bestScore);
-        }
-      }
-      return bestScore;
-    }
   }
 
   // Завершение игры
